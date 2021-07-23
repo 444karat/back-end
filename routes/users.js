@@ -14,7 +14,7 @@ async function  hashPassword (password) {
     }
 };
 
-router.route('/register')
+router.route('/create')
     .get( function (req,res) {
         res.send("это должно приводить к форме регистрации");
     })
@@ -40,25 +40,37 @@ router.route('/register')
         }
     });
 
-
-router.route('/login')
-    .get((req, res) => {
-        res.send('это должно приводить к форме входа')
+router.route('/delete')
+    .get( function (req,res) {
+        res.send("это должно приводить к форме удаления");
     })
-
-    .post(async function (req,res,next) {
+    .delete(async function (req,res,next) {
         try{
             const {username, pass} = req.body;
-            const chekUser =await  User.findOne( {username});
-            const validPass = bcrypt.compareSync(pass, chekUser.pass);
-            if(!validPass) {
-                return res.status(400).json({message:`неверный логин или пароль`});
-            }
-            return res.json({message: "log in"});
+            //const chekUser =await  User.findOne( {username});
+            const chekUser =await  User.findOneAndDelete({username}, function (err, docs) { res.send("DELETE ")});
         }catch (e) {
             console.log(e);
-            res.status(400).json({message:"оишкба авторизации"});
+            res.status(400).json({message:"оишкба "});
         }
+
     });
+
+router.route('/update')
+    .get( function (req,res) {
+        res.send("это должно приводить к форме update");
+    })
+    .post(async function (req,res,next) {
+        try{
+            const {username, email} = req.body;
+
+            const chekUser =await  User.updateOne({username},{$set:{email}},function (err,result) {res.send("UPDATE");});
+        }catch (e) {
+            console.log(e);
+            res.status(400).json({message:"оишкба "});
+        }
+
+    });
+
 
 module.exports = router;

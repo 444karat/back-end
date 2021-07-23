@@ -8,9 +8,11 @@ const app = express();
 app.use(express.json());
 
 app.use('/', require('./routes/rout.js'));
-app.use('/users', require('./routes/users.js'));
+app.use('/login', require('./routes/login.js'));
+app.use('/registrate', require('./routes/registrate.js'));
+app.use('/api', require('./routes/users.js'));
 app.use(function (req,res,next) {
-    res.send({message: " 404 err;не найдено"});
+    res.send({message: "не найдено"});
 });
 
 async function start() {
