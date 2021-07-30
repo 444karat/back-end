@@ -17,7 +17,9 @@ app.use(function (req,res,next) {
 
 async function start() {
     try{
-        await mongo.connect(db_url, {useNewUrlParser: true ,  useUnifiedTopology: true});
+        await mongo.connect(db_url, {useNewUrlParser: true ,  useUnifiedTopology: true}, function (err) {
+            console.log("conncet DB");
+        });
         app.listen(PORT, ()=> {console.log(`сервер на ${PORT}`);});
     }catch (e) {
         console.log(e);

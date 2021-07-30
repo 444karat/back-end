@@ -14,6 +14,7 @@ async function  hashPassword (password) {
     }
 };
 
+router.use(require('../middleware/middleware.js').mdlwr);
 router.route('/create')
     .get( function (req,res) {
         res.send("это должно приводить к форме регистрации");
