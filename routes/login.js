@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 function generateAccessToken(id) {
-    const payload = {id};
-    return jwt.sign(payload, {secret: "SECRET_KEY_RANDOM"}, {expiresIn: "24h"});
+    const payload = {user_id: id};
+    return jwt.sign(payload, "SECRET_KEY_RANDOM", {expiresIn: "24h"});
 }
 
 router.route('/')
@@ -24,9 +24,9 @@ router.route('/')
                 return res.status(400).json({message:`неверный логин или пароль`});
             }
             const token = generateAccessToken(chekUser._id);
-            res.json({message: "log in"},
-                            {token});
-            return res.redirect("/");
+            console.log(token);
+            res.send({message: "log in"});
+           // return res.redirect("/");
         }catch (e) {
             console.log(e);
             res.status(400).json({message:"оишкба авторизации"});
