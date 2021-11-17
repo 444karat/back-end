@@ -1,32 +1,17 @@
 const express = require("express");
-const mongo = require("mongoose");
+const  bodyParser = require('body-parser');
+const passport = require('passport');
+const expressSession = require('express-session');
 
-const db_url = "mongodb+srv://user:1@auth.rpgtj.mongodb.net/auth?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.use(express.json());
-
-app.use('/', require('./routes/rout.js'));
-app.use('/login', require('./routes/login.js'));
-app.use('/registrate', require('./routes/registrate.js'));
-app.use('/api', require('./routes/users.js'));
-app.use(function (req,res,next) {
-    res.send({message: "не найдено"});
-});
-
-async function start() {
-    try{
-        await mongo.connect(db_url, {useNewUrlParser: true ,  useUnifiedTopology: true}, function (err) {
-            console.log("conncet DB");
-        });
-        app.listen(PORT, ()=> {console.log(`сервер на ${PORT}`);});
-    }catch (e) {
-        console.log(e);
-    }
-}
-start();
 
 
+app.listen(PORT, ()=> {console.log(`сервер на ${PORT}`);});
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
+app.use('/', require('./route/auth.js'));
+app.use('/api', require('./route/user.js'));

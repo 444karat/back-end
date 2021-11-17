@@ -1,21 +1,27 @@
 {
-  "name": "auth",
+  "name": "hh",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "Rozinov Aleksandr <sasha7971182@gmail.com>",
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.23.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "halson": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.12",
-    "nodemon": "^2.0.7",
-    "password-validator": "^5.1.1",
-    "validator": "^13.6.0"
+    "knex": "^0.95.11",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.14",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.7.1"
   }
 }
